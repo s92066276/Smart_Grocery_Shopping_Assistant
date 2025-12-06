@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PlusCircle } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 const formSchema = z.object({
   itemName: z.string().min(2, {
@@ -49,23 +49,23 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
   }
 
   return (
-    <Card className="card-hover border-2 border-primary/20 rounded-2xl shadow-xl shadow-primary/5 bg-gradient-to-br from-card to-card/95">
-      <CardContent className="pt-8 pb-8 px-8">
+    <Card className="modern-card">
+      <CardContent className="pt-6 pb-6 px-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="itemName"
                 render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel className="text-base font-semibold text-foreground">Item Name</FormLabel>
+                    <FormLabel className="text-sm font-medium">Item Name</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="e.g., Organic Milk" 
                         {...field} 
                         disabled={disabled}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -77,14 +77,14 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
                 name="quantity"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold text-foreground">Quantity</FormLabel>
+                    <FormLabel className="text-sm font-medium">Quantity</FormLabel>
                     <FormControl>
                       <Input 
                         type="number" 
                         placeholder="e.g., 2" 
                         {...field} 
                         disabled={disabled}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -96,14 +96,14 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
                 name="unit"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold text-foreground">Unit</FormLabel>
+                    <FormLabel className="text-sm font-medium">Unit</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value || undefined} disabled={disabled}>
                       <FormControl>
-                        <SelectTrigger className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30">
-                          <SelectValue placeholder="Select unit (optional)" />
+                        <SelectTrigger className="h-10 rounded-lg border-border bg-background">
+                          <SelectValue placeholder="Select unit" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-xl border-2 border-primary/20">
+                      <SelectContent>
                         <SelectItem value="kg">kg</SelectItem>
                         <SelectItem value="g">g</SelectItem>
                         <SelectItem value="L">L</SelectItem>
@@ -121,14 +121,14 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold text-foreground">Category</FormLabel>
+                    <FormLabel className="text-sm font-medium">Category</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value || undefined} disabled={disabled}>
                       <FormControl>
-                        <SelectTrigger className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30">
-                          <SelectValue placeholder="Select category (optional)" />
+                        <SelectTrigger className="h-10 rounded-lg border-border bg-background">
+                          <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-xl border-2 border-primary/20">
+                      <SelectContent>
                         <SelectItem value="Dairy">Dairy</SelectItem>
                         <SelectItem value="Fruits">Fruits</SelectItem>
                         <SelectItem value="Vegetables">Vegetables</SelectItem>
@@ -148,14 +148,14 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
                 control={form.control}
                 name="expiryDate"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base font-semibold text-foreground">Expiry Date (Optional)</FormLabel>
+                  <FormItem className="md:col-span-2">
+                    <FormLabel className="text-sm font-medium">Expiry Date (Optional)</FormLabel>
                     <FormControl>
                       <Input 
                         type="date" 
                         {...field} 
                         disabled={disabled}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -166,9 +166,9 @@ export function AddItemForm({ onAddItem, disabled }: AddItemFormProps) {
             <Button 
               type="submit" 
               disabled={disabled}
-              className="w-full sm:w-auto h-12 px-8 rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base transition-all"
+              className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium smooth-transition"
             >
-              <PlusCircle className="mr-2 h-5 w-5" /> Add Item
+              <Plus className="mr-2 h-4 w-4" /> Add Item
             </Button>
           </form>
         </Form>

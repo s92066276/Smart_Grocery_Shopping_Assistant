@@ -77,24 +77,24 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] rounded-2xl border-2 border-primary/20 shadow-2xl">
-        <DialogHeader className="pb-5">
-          <DialogTitle className="text-2xl font-bold">Edit Item</DialogTitle>
-          <DialogDescription className="text-base font-medium">Update the item details below.</DialogDescription>
+      <DialogContent className="sm:max-w-[500px] rounded-lg">
+        <DialogHeader>
+          <DialogTitle className="text-lg font-semibold">Edit Item</DialogTitle>
+          <DialogDescription className="text-sm">Update the item details below.</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base font-semibold">Item Name</FormLabel>
+                  <FormLabel className="text-sm font-medium">Item Name</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="e.g., Organic Milk" 
                       {...field} 
-                      className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                      className="h-10 rounded-lg border-border bg-background"
                     />
                   </FormControl>
                   <FormMessage />
@@ -107,13 +107,13 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
                 name="quantity"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Quantity</FormLabel>
+                    <FormLabel className="text-sm font-medium">Quantity</FormLabel>
                     <FormControl>
                       <Input 
                         type="number" 
                         placeholder="e.g., 2" 
                         {...field} 
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -125,14 +125,14 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
                 name="unit"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Unit</FormLabel>
+                    <FormLabel className="text-sm font-medium">Unit</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value || undefined}>
                       <FormControl>
-                        <SelectTrigger className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30">
+                        <SelectTrigger className="h-10 rounded-lg border-border bg-background">
                           <SelectValue placeholder="Select unit" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-xl border-2 border-primary/20">
+                      <SelectContent>
                         <SelectItem value="kg">kg</SelectItem>
                         <SelectItem value="g">g</SelectItem>
                         <SelectItem value="L">L</SelectItem>
@@ -151,14 +151,14 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base font-semibold">Category</FormLabel>
+                  <FormLabel className="text-sm font-medium">Category</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value || undefined}>
                     <FormControl>
-                      <SelectTrigger className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30">
+                      <SelectTrigger className="h-10 rounded-lg border-border bg-background">
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="rounded-xl border-2 border-primary/20">
+                    <SelectContent>
                       <SelectItem value="Dairy">Dairy</SelectItem>
                       <SelectItem value="Fruits">Fruits</SelectItem>
                       <SelectItem value="Vegetables">Vegetables</SelectItem>
@@ -179,30 +179,30 @@ export function EditItemDialog({ item, open, onOpenChange, onSave }: EditItemDia
               name="expiryDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base font-semibold">Expiry Date (Optional)</FormLabel>
+                  <FormLabel className="text-sm font-medium">Expiry Date (Optional)</FormLabel>
                   <FormControl>
                     <Input 
                       type="date" 
                       {...field} 
-                      className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                      className="h-10 rounded-lg border-border bg-background"
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <DialogFooter className="pt-6 gap-3">
+            <DialogFooter className="pt-4 gap-2">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => onOpenChange(false)}
-                className="h-12 px-6 rounded-xl border-2 hover:bg-primary/10 hover:border-primary/50 font-semibold"
+                className="h-10 px-4 rounded-lg border-border hover:bg-accent/50"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit"
-                className="h-12 px-6 rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+                className="h-10 px-4 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Save Changes
               </Button>

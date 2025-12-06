@@ -107,61 +107,61 @@ export default function RulesManager() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-10 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-8 border-b-2 border-primary/20">
-        <div className="space-y-3">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg green-glow">
-              <Settings className="h-7 w-7 text-primary-foreground" />
+    <div className="max-w-7xl mx-auto space-y-6 py-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-border">
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Settings className="h-5 w-5 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold font-headline bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Rules Management</h1>
+            <h1 className="text-2xl font-semibold gradient-text">Rules Management</h1>
           </div>
-          <p className="text-muted-foreground text-base sm:text-lg ml-14 font-medium">
+          <p className="text-sm text-muted-foreground ml-11">
             Manage your grocery shopping assistant rules. Add, edit, or delete rules to customize suggestions.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2">
           <Button 
             variant="outline" 
-            size="lg" 
+            size="sm" 
             onClick={handleExport}
-            className="rounded-xl border-2 border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-all font-semibold px-5"
+            className="rounded-lg border-border hover:bg-accent/50"
           >
-            <Download className="mr-2 h-5 w-5" />
+            <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
           <Button 
             variant="outline" 
-            size="lg" 
+            size="sm" 
             onClick={handleImport}
-            className="rounded-xl border-2 border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-all font-semibold px-5"
+            className="rounded-lg border-border hover:bg-accent/50"
           >
-            <Upload className="mr-2 h-5 w-5" />
+            <Upload className="mr-2 h-4 w-4" />
             Import
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button 
                 variant="outline" 
-                size="lg"
-                className="rounded-xl border-2 border-destructive/30 hover:bg-destructive/20 hover:border-destructive/50 transition-all font-semibold px-5"
+                size="sm"
+                className="rounded-lg border-destructive/50 hover:bg-destructive/10 hover:border-destructive text-destructive"
               >
-                <RotateCcw className="mr-2 h-5 w-5" />
+                <RotateCcw className="mr-2 h-4 w-4" />
                 Reset
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className="border-2 border-primary/20 rounded-2xl">
+            <AlertDialogContent className="rounded-lg">
               <AlertDialogHeader>
-                <AlertDialogTitle className="text-2xl font-bold">Reset to Default Rules?</AlertDialogTitle>
-                <AlertDialogDescription className="text-base font-medium">
+                <AlertDialogTitle className="text-lg font-semibold">Reset to Default Rules?</AlertDialogTitle>
+                <AlertDialogDescription className="text-sm">
                   This will replace all your custom rules with the default rules. This action cannot be undone.
                 </AlertDialogDescription>
               </AlertDialogHeader>
-              <AlertDialogFooter className="gap-3">
-                <AlertDialogCancel className="rounded-xl border-2 h-12 px-6 font-semibold">Cancel</AlertDialogCancel>
+              <AlertDialogFooter className="gap-2">
+                <AlertDialogCancel className="rounded-lg h-10 px-4">Cancel</AlertDialogCancel>
                 <AlertDialogAction 
                   onClick={handleReset}
-                  className="rounded-xl shadow-lg shadow-destructive/20 hover:shadow-xl hover:shadow-destructive/30 bg-destructive hover:bg-destructive/90 text-destructive-foreground font-semibold h-12 px-6"
+                  className="rounded-lg bg-destructive hover:bg-destructive/90 text-destructive-foreground h-10 px-4"
                 >
                   Reset
                 </AlertDialogAction>
@@ -172,28 +172,28 @@ export default function RulesManager() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-3 mb-10 h-14 bg-muted/60 rounded-2xl p-1.5 border-2 border-primary/10">
+        <TabsList className="inline-flex h-10 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-full sm:w-auto mb-6">
           <TabsTrigger 
             value="healthier" 
-            className="text-sm font-semibold rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
           >
             Healthier Alternatives
           </TabsTrigger>
           <TabsTrigger 
             value="category" 
-            className="text-sm font-semibold rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
           >
             Category Associations
           </TabsTrigger>
           <TabsTrigger 
             value="expiry" 
-            className="text-sm font-semibold rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
           >
             Expiry Rules
           </TabsTrigger>
           <TabsTrigger 
             value="custom" 
-            className="text-sm font-semibold rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg data-[state=active]:shadow-primary/20 transition-all"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
           >
             Custom Rules
           </TabsTrigger>

@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Trash2, Edit, ShoppingCart } from 'lucide-react';
+import { Trash2, Edit, ShoppingCart, Package } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
 import { EditItemDialog } from './EditItemDialog';
 import type { GroceryItem } from '@/lib/types';
@@ -34,15 +33,15 @@ export function GroceryListTable({ groceryList, onRemoveItem, onEditItem, isLoad
     
   if (!isLoaded) {
     return (
-        <Card>
+        <Card className="modern-card">
             <CardHeader>
-                <CardTitle className="font-headline">My Grocery List</CardTitle>
+                <CardTitle>My Grocery List</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="space-y-2">
-                    <Skeleton className="h-10 w-full" />
-                    <Skeleton className="h-10 w-full" />
-                    <Skeleton className="h-10 w-full" />
+                <div className="space-y-3">
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
                 </div>
             </CardContent>
         </Card>
@@ -51,89 +50,79 @@ export function GroceryListTable({ groceryList, onRemoveItem, onEditItem, isLoad
 
   return (
     <>
-      <Card className="card-hover border-2 border-primary/20 rounded-2xl shadow-xl shadow-primary/5 bg-gradient-to-br from-card to-card/95">
-        <CardHeader className="pb-5 border-b-2 border-primary/10 px-8 pt-8">
+      <Card className="modern-card">
+        <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-4 w-4 rounded-full bg-primary shadow-lg shadow-primary/50"></div>
-              <CardTitle className="font-headline text-2xl font-bold text-foreground">My Grocery List</CardTitle>
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Package className="h-5 w-5 text-primary" />
+              </div>
+              <CardTitle className="text-xl font-semibold">My Grocery List</CardTitle>
             </div>
             {groceryList.length > 0 && (
-              <Badge variant="secondary" className="text-sm font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary border-2 border-primary/20">
+              <Badge variant="secondary" className="bg-primary/10 text-primary border border-primary/20">
                 {groceryList.length} {groceryList.length === 1 ? 'item' : 'items'}
               </Badge>
             )}
           </div>
         </CardHeader>
-        <CardContent className="pt-8 px-8 pb-8">
+        <CardContent>
           {groceryList.length === 0 ? (
-            <div className="text-center py-20 space-y-4">
-              <div className="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center shadow-lg">
-                <ShoppingCart className="h-10 w-10 text-primary" />
+            <div className="text-center py-16 space-y-4">
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <ShoppingCart className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <p className="text-foreground font-semibold text-lg">Your grocery list is empty</p>
-                <p className="text-sm text-muted-foreground mt-2">Add items to get started</p>
+                <p className="text-foreground font-medium">Your grocery list is empty</p>
+                <p className="text-sm text-muted-foreground mt-1">Add items to get started</p>
               </div>
             </div>
           ) : (
-            <div className="border-2 border-primary/20 rounded-2xl overflow-hidden shadow-lg">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-gradient-to-r from-primary/10 to-primary/5 border-b-2 border-primary/20">
-                    <TableHead className="font-bold text-base text-foreground">Item</TableHead>
-                    <TableHead className="font-bold text-base text-foreground">Quantity</TableHead>
-                    <TableHead className="font-bold text-base text-foreground">Category</TableHead>
-                    <TableHead className="text-right w-[140px] font-bold text-base text-foreground">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {groceryList.map((item) => (
-                    <TableRow 
-                      key={item.id} 
-                      className="hover:bg-primary/5 transition-all border-b border-primary/10 last:border-b-0"
+            <div className="space-y-3">
+              {groceryList.map((item) => (
+                <div
+                  key={item.id}
+                  className="group flex items-center justify-between p-4 rounded-lg border border-border bg-card/50 hover:bg-accent/5 hover:border-primary/20 smooth-transition"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-1">
+                      <h3 className="font-medium text-foreground truncate">{item.name}</h3>
+                      {item.category && (
+                        <Badge variant="outline" className="text-xs shrink-0">
+                          {item.category}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {item.quantity && item.unit 
+                        ? `${item.quantity} ${item.unit}`
+                        : item.quantity 
+                        ? item.quantity.toString()
+                        : 'No quantity specified'}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 ml-4">
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => handleEditClick(item)}
+                      className="h-9 w-9 rounded-lg hover:bg-primary/10 hover:text-primary smooth-transition"
                     >
-                      <TableCell className="font-semibold text-base">{item.name}</TableCell>
-                      <TableCell className="text-base">
-                        {item.quantity && item.unit 
-                          ? `${item.quantity} ${item.unit}`
-                          : item.quantity 
-                          ? item.quantity.toString()
-                          : '-'}
-                      </TableCell>
-                      <TableCell>
-                        {item.category ? (
-                          <Badge variant="secondary" className="text-xs font-semibold px-3 py-1 rounded-full bg-accent/20 text-accent-foreground border border-accent/30">{item.category}</Badge>
-                        ) : (
-                          <span className="text-muted-foreground">-</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => handleEditClick(item)}
-                            className="h-10 w-10 rounded-xl hover:bg-primary/20 hover:text-primary transition-all border-2 border-transparent hover:border-primary/30"
-                          >
-                            <Edit className="h-5 w-5" />
-                            <span className="sr-only">Edit {item.name}</span>
-                          </Button>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => onRemoveItem(item.id)}
-                            className="h-10 w-10 rounded-xl hover:bg-destructive/20 hover:text-destructive transition-all border-2 border-transparent hover:border-destructive/30"
-                          >
-                            <Trash2 className="h-5 w-5" />
-                            <span className="sr-only">Remove {item.name}</span>
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                      <Edit className="h-4 w-4" />
+                      <span className="sr-only">Edit {item.name}</span>
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => onRemoveItem(item.id)}
+                      className="h-9 w-9 rounded-lg hover:bg-destructive/10 hover:text-destructive smooth-transition"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      <span className="sr-only">Remove {item.name}</span>
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </CardContent>

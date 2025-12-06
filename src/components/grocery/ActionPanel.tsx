@@ -56,95 +56,95 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
   };
 
   return (
-    <div className="space-y-8">
-      <Card className="card-hover border-2 border-primary/20 rounded-2xl shadow-xl shadow-primary/5 bg-gradient-to-br from-card to-card/95">
-        <CardHeader className="pb-5 border-b-2 border-primary/10 px-8 pt-8">
+    <div className="space-y-6">
+      <Card className="modern-card">
+        <CardHeader className="pb-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg green-glow">
-              <Sparkles className="h-6 w-6 text-primary-foreground" />
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Sparkles className="h-5 w-5 text-primary" />
             </div>
-            <CardTitle className="font-headline text-2xl font-bold">AI Assistant</CardTitle>
+            <CardTitle className="text-lg font-semibold">AI Suggestions</CardTitle>
           </div>
-          <CardDescription className="text-base mt-2 font-medium">
-            Get smart suggestions for your groceries based on your purchase history and preferences.
+          <CardDescription className="text-sm">
+            Get smart suggestions for your groceries
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-8 px-8 pb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <CardContent>
+          <div className="grid grid-cols-1 gap-3">
             <Button 
               onClick={() => handleAction('re-purchase')} 
               disabled={!isLoaded || isLoading}
               variant="default"
-              className="w-full h-auto py-4 px-5 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all"
+              className="w-full h-auto py-3 px-4 flex items-center gap-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium smooth-transition"
             >
-              <Recycle className="h-6 w-6 flex-shrink-0" />
-              <span className="text-sm font-semibold whitespace-normal break-words">Suggest Re-Purchase</span>
+              <Recycle className="h-4 w-4" />
+              <span className="text-sm">Suggest Re-Purchase</span>
             </Button>
             <Button 
               onClick={() => handleAction('healthier')} 
               disabled={!isLoaded || isLoading}
               variant="outline"
-              className="w-full h-auto py-4 px-5 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left rounded-xl border-2 border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-all font-semibold"
+              className="w-full h-auto py-3 px-4 flex items-center gap-2 rounded-lg border-border hover:bg-accent/50 font-medium smooth-transition"
             >
-              <Wheat className="h-6 w-6 flex-shrink-0" />
-              <span className="text-sm font-semibold whitespace-normal break-words">Healthier Options</span>
+              <Wheat className="h-4 w-4" />
+              <span className="text-sm">Healthier Options</span>
             </Button>
             <Button 
               onClick={() => handleAction('expiry')} 
               disabled={!isLoaded || isLoading}
               variant="destructive"
-              className="w-full h-auto py-4 px-5 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left rounded-xl shadow-lg shadow-destructive/20 hover:shadow-xl hover:shadow-destructive/30 bg-destructive hover:bg-destructive/90 text-destructive-foreground font-semibold transition-all"
+              className="w-full h-auto py-3 px-4 flex items-center gap-2 rounded-lg bg-destructive hover:bg-destructive/90 text-destructive-foreground font-medium smooth-transition"
             >
-              <AlertTriangle className="h-6 w-6 flex-shrink-0" />
-              <span className="text-sm font-semibold whitespace-normal break-words">Check Expiry</span>
+              <AlertTriangle className="h-4 w-4" />
+              <span className="text-sm">Check Expiry</span>
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="min-h-[280px] card-hover border-2 border-primary/20 rounded-2xl shadow-xl shadow-primary/5 bg-gradient-to-br from-card to-card/95">
-        <CardHeader className="pb-5 border-b-2 border-primary/10 px-8 pt-8">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-gradient-to-br from-primary/30 to-primary/20 shadow-lg">
+      <Card className="modern-card min-h-[300px]">
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
               {icon}
             </div>
             <div className="flex-1">
-              <CardTitle className="font-headline text-2xl font-bold">{title}</CardTitle>
+              <CardTitle className="text-lg font-semibold">{title}</CardTitle>
               {suggestions.length > 0 && !isLoading && (
-                <Badge variant="secondary" className="mt-2 text-sm font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary border-2 border-primary/20">
+                <Badge variant="secondary" className="mt-2 text-xs bg-primary/10 text-primary border border-primary/20">
                   {suggestions.length} {suggestions.length === 1 ? 'suggestion' : 'suggestions'}
                 </Badge>
               )}
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pt-8 px-8 pb-8">
+        <CardContent>
           {isLoading ? (
-            <div className="flex flex-col justify-center items-center py-20 space-y-4">
-              <Loader2 className="h-12 w-12 animate-spin text-primary" />
-              <p className="text-base text-muted-foreground font-semibold">Analyzing your data...</p>
+            <div className="flex flex-col justify-center items-center py-16 space-y-3">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <p className="text-sm text-muted-foreground">Analyzing your data...</p>
             </div>
           ) : (
             suggestions.length > 0 ? (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="p-5 rounded-xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent hover:bg-primary/10 hover:border-primary/40 transition-all card-hover"
+                    className="p-4 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 smooth-transition"
                   >
-                    <p className="text-base text-foreground leading-relaxed font-medium">{suggestion}</p>
+                    <p className="text-sm text-foreground leading-relaxed">{suggestion}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col justify-center items-center py-20 space-y-4">
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 shadow-lg">
-                  <Lightbulb className="h-10 w-10 text-primary" />
+              <div className="flex flex-col justify-center items-center py-16 space-y-3">
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <Lightbulb className="h-6 w-6 text-primary" />
                 </div>
-                <div className="text-center space-y-2">
-                  <p className="text-base font-semibold text-foreground">No suggestions yet</p>
-                  <p className="text-sm text-muted-foreground">
-                    Click a button above to get personalized suggestions
+                <div className="text-center space-y-1">
+                  <p className="text-sm font-medium text-foreground">No suggestions yet</p>
+                  <p className="text-xs text-muted-foreground">
+                    Click a button above to get suggestions
                   </p>
                 </div>
               </div>

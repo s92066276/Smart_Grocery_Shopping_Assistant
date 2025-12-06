@@ -55,22 +55,22 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md card-hover border-2 border-primary/20 rounded-2xl shadow-2xl shadow-primary/10 bg-gradient-to-br from-card to-card/95">
-        <CardHeader className="space-y-3 pb-8 px-8 pt-10">
-          <div className="flex items-center gap-4 mb-3">
-            <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-lg green-glow">
-              <ShoppingCart className="h-7 w-7 text-primary-foreground" />
+      <Card className="w-full max-w-md modern-card">
+        <CardHeader className="space-y-2 pb-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <ShoppingCart className="h-5 w-5 text-primary" />
             </div>
-            <CardTitle className="font-headline text-3xl font-bold">Sign Up</CardTitle>
+            <CardTitle className="text-2xl font-semibold">Sign Up</CardTitle>
           </div>
-          <CardDescription className="text-base font-medium">Create a new Smart Shopper account</CardDescription>
+          <CardDescription className="text-sm">Create a new Smart Shopper account</CardDescription>
         </CardHeader>
-        <CardContent className="px-8 pb-10">
+        <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               {error && (
-                <Alert variant="destructive" className="border-2 border-destructive/50 rounded-xl">
-                  <AlertDescription className="font-medium">{error}</AlertDescription>
+                <Alert variant="destructive" className="rounded-lg border-destructive/50">
+                  <AlertDescription className="text-sm">{error}</AlertDescription>
                 </Alert>
               )}
               <FormField
@@ -78,14 +78,14 @@ export default function SignUpPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Email</FormLabel>
+                    <FormLabel className="text-sm font-medium">Email</FormLabel>
                     <FormControl>
                       <Input 
                         type="email" 
                         placeholder="your@email.com" 
                         {...field} 
                         disabled={isLoading}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -97,13 +97,13 @@ export default function SignUpPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Password</FormLabel>
+                    <FormLabel className="text-sm font-medium">Password</FormLabel>
                     <FormControl>
                       <Input 
                         type="password" 
                         {...field} 
                         disabled={isLoading}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -115,13 +115,13 @@ export default function SignUpPage() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-base font-semibold">Confirm Password</FormLabel>
+                    <FormLabel className="text-sm font-medium">Confirm Password</FormLabel>
                     <FormControl>
                       <Input 
                         type="password" 
                         {...field} 
                         disabled={isLoading}
-                        className="h-12 rounded-xl border-2 border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all text-base"
+                        className="h-10 rounded-lg border-border bg-background"
                       />
                     </FormControl>
                     <FormMessage />
@@ -130,12 +130,12 @@ export default function SignUpPage() {
               />
               <Button 
                 type="submit" 
-                className="w-full h-12 rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base transition-all" 
+                className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium smooth-transition" 
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Creating account...
                   </>
                 ) : (
@@ -144,9 +144,9 @@ export default function SignUpPage() {
               </Button>
             </form>
           </Form>
-          <div className="mt-8 text-center text-base">
-            <span className="text-muted-foreground font-medium">Already have an account? </span>
-            <Link href="/login" className="text-primary hover:underline font-semibold">
+          <div className="mt-6 text-center text-sm">
+            <span className="text-muted-foreground">Already have an account? </span>
+            <Link href="/login" className="text-primary hover:underline font-medium">
               Sign in
             </Link>
           </div>
