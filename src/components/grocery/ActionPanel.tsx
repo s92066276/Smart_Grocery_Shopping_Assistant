@@ -57,23 +57,25 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader className="pb-4">
+      <Card className="card-hover border-2">
+        <CardHeader className="pb-4 border-b">
           <div className="flex items-center gap-2 mb-1">
-            <Sparkles className="h-5 w-5 text-primary" />
+            <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+              <Sparkles className="h-5 w-5 text-primary" />
+            </div>
             <CardTitle className="font-headline text-lg">AI Assistant</CardTitle>
           </div>
-          <CardDescription className="text-sm">
+          <CardDescription className="text-sm mt-2">
             Get smart suggestions for your groceries based on your purchase history and preferences.
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <Button 
               onClick={() => handleAction('re-purchase')} 
               disabled={!isLoaded || isLoading}
               variant="default"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+              className="w-full h-auto py-3.5 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left shadow-sm hover:shadow-md transition-all"
             >
               <Recycle className="h-5 w-5 flex-shrink-0" />
               <span className="text-sm font-medium whitespace-normal break-words">Suggest Re-Purchase</span>
@@ -82,7 +84,7 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
               onClick={() => handleAction('healthier')} 
               disabled={!isLoaded || isLoading}
               variant="outline"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+              className="w-full h-auto py-3.5 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left border-2 hover:bg-accent/10 hover:border-accent transition-all"
             >
               <Wheat className="h-5 w-5 flex-shrink-0" />
               <span className="text-sm font-medium whitespace-normal break-words">Healthier Options</span>
@@ -91,7 +93,7 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
               onClick={() => handleAction('expiry')} 
               disabled={!isLoaded || isLoading}
               variant="destructive"
-              className="w-full h-auto py-3 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left"
+              className="w-full h-auto py-3.5 px-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center text-center sm:text-left shadow-sm hover:shadow-md transition-all"
             >
               <AlertTriangle className="h-5 w-5 flex-shrink-0" />
               <span className="text-sm font-medium whitespace-normal break-words">Check Expiry</span>
@@ -100,27 +102,27 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
         </CardContent>
       </Card>
 
-      <Card className="min-h-[280px]">
-        <CardHeader className="pb-4">
+      <Card className="min-h-[280px] card-hover border-2">
+        <CardHeader className="pb-4 border-b">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="p-2.5 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 shadow-sm">
               {icon}
             </div>
             <div className="flex-1">
               <CardTitle className="font-headline text-lg">{title}</CardTitle>
               {suggestions.length > 0 && !isLoading && (
-                <Badge variant="secondary" className="mt-1.5 text-xs">
+                <Badge variant="secondary" className="mt-1.5 text-xs font-medium">
                   {suggestions.length} {suggestions.length === 1 ? 'suggestion' : 'suggestions'}
                 </Badge>
               )}
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="pt-6">
           {isLoading ? (
             <div className="flex flex-col justify-center items-center py-16 space-y-3">
               <Loader2 className="h-10 w-10 animate-spin text-primary" />
-              <p className="text-sm text-muted-foreground">Analyzing your data...</p>
+              <p className="text-sm text-muted-foreground font-medium">Analyzing your data...</p>
             </div>
           ) : (
             suggestions.length > 0 ? (
@@ -128,7 +130,7 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
+                    className="p-4 rounded-lg border-2 bg-card hover:bg-muted/50 hover:border-primary/20 transition-all card-hover"
                   >
                     <p className="text-sm text-foreground leading-relaxed">{suggestion}</p>
                   </div>
@@ -136,7 +138,9 @@ export function ActionPanel({ groceryList, purchaseHistory, isLoaded }: ActionPa
               </div>
             ) : (
               <div className="flex flex-col justify-center items-center py-16 space-y-3">
-                <Lightbulb className="h-12 w-12 text-muted-foreground/50" />
+                <div className="p-4 rounded-full bg-muted">
+                  <Lightbulb className="h-8 w-8 text-muted-foreground/50" />
+                </div>
                 <div className="text-center space-y-1">
                   <p className="text-sm font-medium text-foreground">No suggestions yet</p>
                   <p className="text-xs text-muted-foreground">

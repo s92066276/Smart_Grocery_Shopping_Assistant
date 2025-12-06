@@ -160,13 +160,19 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
   };
 
   return (
-    <Card className="h-[calc(100vh-12rem)] flex flex-col shadow-sm">
-      <CardHeader className="pb-4">
-        <CardTitle className="font-headline flex items-center gap-2 text-xl">
-          <Bot className="h-5 w-5" />
-          AI Assistant
-        </CardTitle>
-        <CardDescription className="mt-1">Chat with your grocery shopping assistant</CardDescription>
+    <Card className="h-[calc(100vh-12rem)] flex flex-col shadow-lg border-2 card-hover">
+      <CardHeader className="pb-4 border-b">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+            <Bot className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <CardTitle className="font-headline flex items-center gap-2 text-xl">
+              AI Assistant
+            </CardTitle>
+            <CardDescription className="mt-1">Chat with your grocery shopping assistant</CardDescription>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="flex flex-col flex-1 min-h-0 px-6 pb-6">
         <ScrollArea className="flex-1 pr-4 mb-4" ref={scrollRef}>
@@ -177,15 +183,15 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
                 className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {message.role === 'assistant' && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bot className="h-4 w-4 text-primary" />
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center shadow-sm">
+                    <Bot className="h-5 w-5 text-primary" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-lg p-4 ${
+                  className={`max-w-[85%] rounded-xl p-4 shadow-sm transition-all ${
                     message.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted'
+                      ? 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground'
+                      : 'bg-muted border-2 border-muted-foreground/10'
                   }`}
                 >
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
@@ -196,34 +202,39 @@ export function ChatInterface({ groceryList, purchaseHistory, onAddItem, onRemov
                   )}
                 </div>
                 {message.role === 'user' && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="h-4 w-4 text-primary" />
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center shadow-sm">
+                    <User className="h-5 w-5 text-primary" />
                   </div>
                 )}
               </div>
             ))}
             {isLoading && (
               <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Bot className="h-4 w-4 text-primary" />
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center shadow-sm">
+                  <Bot className="h-5 w-5 text-primary" />
                 </div>
-                <div className="bg-muted rounded-lg p-4">
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                <div className="bg-muted rounded-xl p-4 border-2 border-muted-foreground/10">
+                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </div>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="flex gap-3 pt-4 border-t">
+        <div className="flex gap-3 pt-4 border-t-2">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your message... (e.g., 'Add 2kg rice', 'What should I buy?')"
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 h-11 transition-all focus:ring-2 focus:ring-primary/20"
           />
-          <Button onClick={handleSend} disabled={isLoading || !input.trim()} size="default">
+          <Button 
+            onClick={handleSend} 
+            disabled={isLoading || !input.trim()} 
+            size="default"
+            className="h-11 px-4 shadow-sm hover:shadow-md transition-all"
+          >
             <Send className="h-4 w-4" />
           </Button>
         </div>

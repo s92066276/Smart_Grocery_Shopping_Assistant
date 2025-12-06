@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -55,16 +55,21 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="font-headline text-2xl">Sign Up</CardTitle>
-          <CardDescription>Create a new Smart Shopper account</CardDescription>
+      <Card className="w-full max-w-md card-hover border-2 shadow-xl">
+        <CardHeader className="space-y-2 pb-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2.5 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+              <ShoppingCart className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle className="font-headline text-2xl">Sign Up</CardTitle>
+          </div>
+          <CardDescription className="text-base">Create a new Smart Shopper account</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               {error && (
-                <Alert variant="destructive">
+                <Alert variant="destructive" className="border-2">
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
@@ -73,9 +78,15 @@ export default function SignUpPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-sm font-medium">Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="your@email.com" {...field} disabled={isLoading} />
+                      <Input 
+                        type="email" 
+                        placeholder="your@email.com" 
+                        {...field} 
+                        disabled={isLoading}
+                        className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -86,9 +97,14 @@ export default function SignUpPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="text-sm font-medium">Password</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} disabled={isLoading} />
+                      <Input 
+                        type="password" 
+                        {...field} 
+                        disabled={isLoading}
+                        className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -99,15 +115,24 @@ export default function SignUpPage() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel className="text-sm font-medium">Confirm Password</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} disabled={isLoading} />
+                      <Input 
+                        type="password" 
+                        {...field} 
+                        disabled={isLoading}
+                        className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full h-11 shadow-sm hover:shadow-md transition-all" 
+                disabled={isLoading}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -119,9 +144,9 @@ export default function SignUpPage() {
               </Button>
             </form>
           </Form>
-          <div className="mt-4 text-center text-sm">
+          <div className="mt-6 text-center text-sm">
             <span className="text-muted-foreground">Already have an account? </span>
-            <Link href="/login" className="text-primary hover:underline">
+            <Link href="/login" className="text-primary hover:underline font-medium">
               Sign in
             </Link>
           </div>
